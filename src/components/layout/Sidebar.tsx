@@ -13,7 +13,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4 space-y-6">
+    <div className="w-16 bg-white border-r border-gray-200 flex-col items-center py-4 space-y-6 hidden md:flex">
       {/* Logo */}
       <div className="w-10 h-10 bg-[#1e3a5f] rounded-lg flex items-center justify-center mb-4">
         <div className="grid grid-cols-2 gap-0.5">
