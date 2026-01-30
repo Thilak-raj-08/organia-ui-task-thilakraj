@@ -21,7 +21,7 @@ interface MapComponentProps {
 function LocationMarker({ onLocationSelect, defaultLat, defaultLng }: MapComponentProps) {
   const [position, setPosition] = useState<[number, number]>([
     defaultLat || 9.6615,
-    defaultLng || 80.0255
+    defaultLng || 80.0255,
   ]);
 
   useMapEvents({
@@ -43,7 +43,7 @@ const MapComponent = ({ onLocationSelect, defaultLat, defaultLng }: MapComponent
 
   if (!isMounted) {
     return (
-      <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center">
+      <div className="w-full h-40 bg-gray-200 rounded-lg flex items-center justify-center">
         <span className="text-gray-500">Loading map...</span>
       </div>
     );
@@ -56,18 +56,14 @@ const MapComponent = ({ onLocationSelect, defaultLat, defaultLng }: MapComponent
     <MapContainer
       center={[centerLat, centerLng]}
       zoom={7}
-      style={{ height: '200px', width: '100%', borderRadius: '0.5rem' }}
+      style={{ height: '160px', width: '100%', borderRadius: '0.5rem' }}
+      className="border border-gray-200 rounded-lg overflow-hidden"
     >
-      {/* Light mode map tiles */}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <LocationMarker 
-        onLocationSelect={onLocationSelect}
-        defaultLat={defaultLat}
-        defaultLng={defaultLng}
-      />
+      <LocationMarker onLocationSelect={onLocationSelect} defaultLat={defaultLat} defaultLng={defaultLng} />
     </MapContainer>
   );
 };

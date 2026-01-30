@@ -1,60 +1,56 @@
 'use client';
 import { useState } from 'react';
-import { ChevronRight, ArrowLeftRight } from 'lucide-react';
+import { ChevronRight, ArrowLeftRight, CircleDot, MapPin } from 'lucide-react';
 
 const TabNavigation = () => {
-  const [activeTab, setActiveTab] = useState('T01');
+  const [activeTab, setActiveTab] = useState('T 01');
 
   const tabs = ['T 01', 'T 02', 'T 03', 'T 04', 'T 05', 'T 06'];
 
   return (
     <div className="space-y-4">
       {/* S-01 and S-02 Section */}
-      <div className="flex items-center space-x-4">
-        {/* S-01 Badge */}
-        <div className="flex items-center bg-[#1e3a5f] text-white px-4 py-2 rounded-full space-x-2">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2 bg-[#0f2a4b] text-white px-4 py-2 rounded-full shadow-sm">
           <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-            <span className="text-[#1e3a5f] text-xs font-bold">S</span>
+            <CircleDot className="text-[#0f2a4b]" size={14} />
           </div>
-          <span className="text-sm font-medium">S - 01</span>
-          <span className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs">3</span>
+          <span className="text-sm font-semibold">S - 01</span>
+          <span className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-semibold">$</span>
         </div>
 
-        {/* Arrow */}
         <ChevronRight className="text-gray-400" size={20} />
 
-        {/* S-02 Badge */}
-        <div className="flex items-center border-2 border-gray-300 px-4 py-2 rounded-full space-x-2">
-          <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-            <span className="text-white text-xs font-bold">S</span>
+        <div className="flex items-center gap-3 bg-[#e9eef7] px-4 py-2 rounded-full">
+          <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center border border-gray-200">
+            <MapPin size={14} className="text-orange-400" />
           </div>
-          <span className="text-sm font-medium text-gray-700">S - 02</span>
-          <span className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs text-white">$</span>
+          <span className="text-sm font-semibold text-[#1f2b3a]">S - 02</span>
+          <span className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-[11px] text-white font-semibold">$</span>
         </div>
 
-        {/* Expand Icon */}
-        <button className="ml-auto p-2 hover:bg-gray-100 rounded-lg">
-          <ArrowLeftRight className="text-gray-600" size={20} />
+        <button className="ml-auto p-2 rounded-full border border-gray-200 hover:bg-gray-100">
+          <ArrowLeftRight className="text-gray-600" size={18} />
         </button>
       </div>
 
       {/* Main Details Accordion */}
-      <div className="flex items-center space-x-2 text-sm">
+      <div className="flex items-center gap-2 text-sm text-gray-700">
         <ChevronRight className="text-gray-600" size={18} />
-        <span className="font-semibold text-gray-900">Main Details</span>
+        <span className="font-semibold text-[#0b1b2d]">Main Details</span>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex items-center justify-between bg-white rounded-t-3xl p-2 border-b border-gray-200">
-        <div className="flex space-x-1">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-gray-200 rounded-3xl sm:rounded-full px-3 py-2 shadow-sm">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pr-2 pb-1 sm:pb-0">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-t-2xl text-sm font-medium transition-all ${
+              className={`h-9 sm:h-10 px-4 sm:px-6 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap ${
                 activeTab === tab
-                  ? 'bg-[#1e3a5f] text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-[#0f2a4b] text-white shadow-[0_4px_10px_rgba(15,42,75,0.25)]'
+                  : 'text-[#0f2a4b] hover:bg-gray-100'
               }`}
             >
               {tab}
@@ -62,8 +58,7 @@ const TabNavigation = () => {
           ))}
         </div>
 
-        {/* Add T Button */}
-        <button className="bg-[#6b1f4a] hover:bg-[#561939] text-white px-6 py-2 rounded-full text-sm font-medium transition-colors">
+        <button className="bg-[#7b1f3f] hover:bg-[#661932] text-white h-9 sm:h-10 px-6 rounded-full text-xs font-semibold tracking-wide shadow w-full sm:w-auto">
           Add T
         </button>
       </div>

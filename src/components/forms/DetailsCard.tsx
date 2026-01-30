@@ -1,11 +1,11 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 const MapComponent = dynamic(() => import('../ui/MapComponent'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center">
+    <div className="w-full h-40 bg-gray-200 rounded-lg flex items-center justify-center">
       <span className="text-gray-500">Loading map...</span>
     </div>
   ),
@@ -17,13 +17,13 @@ interface DetailsCardProps {
 }
 
 const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
-  // Different default locations for each card
   const defaultLocations = {
-    1: { lat: 9.6615, lng: 80.0255, city: 'Jaffna' }, // Jaffna
-    2: { lat: 6.9271, lng: 79.8612, city: 'Colombo' }, // Colombo
+    1: { lat: 9.6615, lng: 80.0255, city: '' },
+    2: { lat: 6.9271, lng: 79.8612, city: '' },
   };
 
-  const defaultLocation = defaultLocations[cardNumber as keyof typeof defaultLocations] || defaultLocations[1];
+  const defaultLocation =
+    defaultLocations[cardNumber as keyof typeof defaultLocations] || defaultLocations[1];
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -55,15 +55,12 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border-2 border-[#1e3a5f] p-6 flex-1">
-      {/* Card Header */}
-      <div className="bg-[#1e3a5f] text-white px-4 py-2 rounded-lg mb-6 inline-block">
-        <span className="font-semibold">{title}</span>
+    <div className="bg-white rounded-2xl border-2 border-[#0f2a4b] overflow-hidden flex-1 shadow-sm">
+      <div className="bg-[#0f2a4b] text-white px-4 py-2 text-sm font-semibold">
+        {title}
       </div>
 
-      {/* Form Fields */}
-      <div className="space-y-4">
-        {/* First Name and Last Name Row */}
+      <div className="p-5 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -75,7 +72,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.firstName}
               onChange={handleChange}
               placeholder="First Name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
           <div>
@@ -88,12 +85,11 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.lastName}
               onChange={handleChange}
               placeholder="Last Name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
         </div>
 
-        {/* Contact Person and Number Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -105,7 +101,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.contactPerson}
               onChange={handleChange}
               placeholder="Enter contact person name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
           <div>
@@ -117,27 +113,23 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               name="contactNumber"
               value={formData.contactNumber}
               onChange={handleChange}
-              placeholder="Enter contact number"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              placeholder="+94"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
         </div>
 
-        {/* Map */}
-        <div className="my-4">
-          <MapComponent 
+        <div className="my-2">
+          <MapComponent
             onLocationSelect={handleLocationSelect}
             defaultLat={defaultLocation.lat}
             defaultLng={defaultLocation.lng}
           />
         </div>
 
-        {/* Latitude, Longitude, Province Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Latitude
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
             <input
               type="text"
               name="latitude"
@@ -148,9 +140,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Longitude
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
             <input
               type="text"
               name="longitude"
@@ -170,12 +160,11 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.province}
               onChange={handleChange}
               placeholder="Select the province"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
         </div>
 
-        {/* District and City Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -187,7 +176,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.district}
               onChange={handleChange}
               placeholder="Enter district"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
           <div>
@@ -200,12 +189,11 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter city"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
         </div>
 
-        {/* Street and Address Note Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -217,7 +205,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.street}
               onChange={handleChange}
               placeholder="Enter street name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
           <div>
@@ -230,7 +218,7 @@ const DetailsCard = ({ title, cardNumber }: DetailsCardProps) => {
               value={formData.addressNote}
               onChange={handleChange}
               placeholder="Enter address note"
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]"
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0f2a4b]"
             />
           </div>
         </div>
